@@ -2,10 +2,10 @@ Objetivo
 Sistema de gestión de clientes para uso comercial.
 
 Modelos sugeridos
-[] Client
-[] Interaction
-[] User
-[] Company
+[✅] Client
+[✅] Interaction
+[✅] User - Viene por defecto en DJANGO
+[✅] Company
 
 Funcionalidades clave
 [] CRUD de clientes e interacciones
@@ -18,4 +18,5 @@ Extras o retos opcionales
 
 Tasks
 [] DISEÑAR UI
-[] CREAR MODELOS
+[✅] CREAR MODELOS
+[] AÑADIR MODELOS AL ADMIN
