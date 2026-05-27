@@ -1,0 +1,21 @@
+Objetivo
+Sistema de gestión de clientes para uso comercial.
+
+Modelos sugeridos
+[] Client
+[] Interaction
+[] User
+[] Company
+
+Funcionalidades clave
+[] CRUD de clientes e interacciones
+[] Relación entre comerciales y clientes
+[] Buscador por nombre, email o empresa
+
+Extras o retos opcionales
+[] Visualización de estadísticas
+[] Exportación a Excel o CSV
+
+Tasks
+[] DISEÑAR UI
+[] CREAR MODELOS
