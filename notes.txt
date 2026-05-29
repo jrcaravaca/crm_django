@@ -17,6 +17,7 @@ Extras o retos opcionales
 [] Exportación a Excel o CSV
 
 Tasks
-[] DISEÑAR UI
+[] DISEÑAR UI -- STICH SE ESTÁ ENCARGANDO 
 [✅] CREAR MODELOS
-[] AÑADIR MODELOS AL ADMIN
+[✅] AÑADIR MODELOS AL ADMIN
+[✅] HACER PRUEBAS EN EL ADMIN 

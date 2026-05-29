@@ -1,0 +1,1 @@
+from crm_django.crm.views.client_views import *
