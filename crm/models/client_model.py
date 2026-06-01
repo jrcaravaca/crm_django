@@ -20,3 +20,6 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
+
+    def last_interaction(self):
+        return self.interactions.order_by('-created_at').first()
