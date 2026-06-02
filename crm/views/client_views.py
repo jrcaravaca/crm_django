@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 
 from ..models.client_model import Client
+from ..forms import ClientCreateForm
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -14,3 +16,10 @@ class ClientListView(ListView):
     template_name = 'clients/client_list.html'
     context_object_name = 'clients'
     paginate_by = 10
+
+@method_decorator(login_required, name='dispatch')
+class ClientCreateView(CreateView): 
+    template_name = "clients/client_create.html"
+    model = Client
+    success_url = reverse_lazy('clientes')
+    form_class = ClientCreateForm
