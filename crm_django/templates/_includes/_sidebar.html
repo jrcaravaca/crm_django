@@ -1,4 +1,4 @@
-<aside class="w-[280px] h-screen bg-[#2D3133] border-r border-outline-variant flex flex-col flex-shrink-0">
+<aside class="w-[280px] h-screen bg-gray-900 border-r border-outline-variant flex flex-col flex-shrink-0">
     <div>
         <h1 class="text-white pl-4 pt-4 font-bold"><a href="{% url "home" %}">CRM DJANGO</a></h1>
         <p class="text-gray-400 pl-4 text-xs">Proyecto 2 CRM</p>
@@ -6,7 +6,10 @@
     <nav class="mt-6">
         <ul class="text-white flex flex-col gap-2 px-4">
             <li class="">
-                <a class="block w-full py-2 px-3 rounded-md hover:bg-white/10 transition-colors" href="{% url "clientes" %}">Clientes</a>
+                <a class="block w-full py-2 px-3 rounded-md hover:bg-white/10 transition-colors" href="{% url "clientes" %}">Lista de Clientes</a>
+            </li>
+            <li class="">
+                <a class="block w-full py-2 px-3 rounded-md hover:bg-white/10 transition-colors" href="{% url "crear_clientes" %}">Añadir Cliente</a>
             </li>
         </ul>
     </nav>

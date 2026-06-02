@@ -4,6 +4,7 @@ from django.views.generic.edit import FormView, CreateView, DeleteView, UpdateVi
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
+from django.db.models import Q
 
 from ..models.client_model import Client
 from ..forms import ClientCreateForm
@@ -16,6 +17,16 @@ class ClientListView(ListView):
     template_name = 'clients/client_list.html'
     context_object_name = 'clients'
     paginate_by = 10
+
+    def get_queryset(self): 
+        queryset = super().get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            queryset = queryset.filter(
+                Q(first_name__icontains=query) | Q(last_name__icontains=query) | Q(company__name__icontains=query) | Q(phone__icontains=query)
+            )
+        return queryset
+
 
 @method_decorator(login_required, name='dispatch')
 class ClientCreateView(CreateView): 
