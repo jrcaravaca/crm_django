@@ -8,6 +8,7 @@ from django.urls import reverse, reverse_lazy
 from ..models.client_model import Client
 
 
+@method_decorator(login_required, name='dispatch')
 class ClientListView(ListView): 
     model = Client
     template_name = 'clients/client_list.html'
