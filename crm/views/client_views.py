@@ -34,3 +34,11 @@ class ClientCreateView(CreateView):
     model = Client
     success_url = reverse_lazy('clientes')
     form_class = ClientCreateForm
+
+@method_decorator(login_required, name='dispatch')
+class ClientDetailView(DetailView): 
+    model = Client
+    template_name = 'clients/client_detail.html'
+    context_object_name = 'client'
+
+    

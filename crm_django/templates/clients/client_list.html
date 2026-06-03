@@ -37,7 +37,7 @@
         {% for client in clients %}
             <tr class="hover:bg-gray-50/70 transition-colors duration-200">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{ client.first_name }} {{ client.last_name }}
+                    <a href="{% url "detalle-cliente" client.pk %}">{{ client.first_name }} {{ client.last_name }}</a>
                 </td>
                 <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
                     {{ client.company }}
@@ -67,7 +67,7 @@
     </table>
 </div>
     {% comment %} BOTON DE BUSCAR {% endcomment %}
-<a href="{% url 'crear_clientes' %}" class="w-[200px] mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white 
+<a href="{% url 'crear-cliente' %}" class="w-[200px] mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white 
                                     bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-sm gap-2">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
