@@ -53,6 +53,18 @@ class ClientUpdateView(UpdateView):
         return reverse('detalle-cliente', kwargs={'pk': self.object.id})
 
 
+@method_decorator(login_required, name='dispatch')
+class ClientDeleteView(DeleteView): 
+    model = Client
+    template_name = 'clients/client_delete.html'
+    success_url = reverse_lazy('clientes')
+    context_object_name = 'client'
+
+
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
 
 
 
