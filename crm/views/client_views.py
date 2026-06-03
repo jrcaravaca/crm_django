@@ -35,10 +35,26 @@ class ClientCreateView(CreateView):
     success_url = reverse_lazy('clientes')
     form_class = ClientCreateForm
 
+
 @method_decorator(login_required, name='dispatch')
 class ClientDetailView(DetailView): 
     model = Client
     template_name = 'clients/client_detail.html'
     context_object_name = 'client'
+
+
+@method_decorator(login_required, name='dispatch')
+class ClientUpdateView(UpdateView): 
+    model= Client
+    template_name = 'clients/client_update.html'
+    form_class = ClientCreateForm
+    
+    def get_success_url(self):
+        return reverse('detalle-cliente', kwargs={'pk': self.object.id})
+
+
+
+
+
 
     
