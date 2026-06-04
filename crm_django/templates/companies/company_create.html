@@ -1,0 +1,24 @@
+{% extends "general/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}CRM - Añadir Cliente {% endblock %}
+
+
+{% block page_content %}
+    <h1 class="text-center text-3xl pt-4">Añadir Cliente</h1>
+    <form action="" method="post" enctype="multipart/form-data" class="pt-4 mx-auto max-w-sm text-center">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-sms-6">
+                {{ form.company|as_crispy_field}}
+                {{ form.commercial|as_crispy_field}}
+                {{ form.first_name|as_crispy_field}}
+                {{ form.last_name|as_crispy_field }}
+                {{ form.email|as_crispy_field }}
+                {{ form.phone|as_crispy_field}}
+                {{ form.position|as_crispy_field}}
+            </div>
+            <button class="w-[200px] cursor-pointer mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-sm gap-2">Añadir Cliente</button>
+        </div>
+    </form>
+{% endblock %}
