@@ -43,14 +43,14 @@ class CompanyDetailView(DetailView):
     context_object_name = 'company'
 
 
-# @method_decorator(login_required, name='dispatch')
-# class ClientUpdateView(UpdateView): 
-#     model= Client
-#     template_name = 'clients/client_update.html'
-#     form_class = ClientCreateForm
+@method_decorator(login_required, name='dispatch')
+class CompanyUpdateView(UpdateView): 
+    model= Company
+    template_name = 'companies/company_update.html'
+    form_class = CompanyCreateForm
     
-#     def get_success_url(self):
-#         return reverse('detalle-cliente', kwargs={'pk': self.object.id})
+    def get_success_url(self):
+        return reverse('detalle-empresa', kwargs={'pk': self.object.id})
 
 
 # @method_decorator(login_required, name='dispatch')
