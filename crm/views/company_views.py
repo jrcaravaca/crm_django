@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.db.models import Q
 
 from ..models.company_model import Company
-from ..forms import ClientCreateForm
+from ..forms import CompanyCreateForm
 
 
 
@@ -28,19 +28,19 @@ class CompanyListView(ListView):
         return queryset
 
 
-# @method_decorator(login_required, name='dispatch')
-# class ClientCreateView(CreateView): 
-#     template_name = "clients/client_create.html"
-#     model = Client
-#     success_url = reverse_lazy('clientes')
-#     form_class = ClientCreateForm
+@method_decorator(login_required, name='dispatch')
+class CompanyCreateView(CreateView): 
+    template_name = "companies/company_create.html"
+    model = Company
+    success_url = reverse_lazy('empresas')
+    form_class = CompanyCreateForm
 
 
-# @method_decorator(login_required, name='dispatch')
-# class ClientDetailView(DetailView): 
-#     model = Client
-#     template_name = 'clients/client_detail.html'
-#     context_object_name = 'client'
+@method_decorator(login_required, name='dispatch')
+class CompanyDetailView(DetailView): 
+    model = Company
+    template_name = 'companies/company_detail.html'
+    context_object_name = 'company'
 
 
 # @method_decorator(login_required, name='dispatch')

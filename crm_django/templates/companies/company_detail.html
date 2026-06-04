@@ -1,5 +1,5 @@
 {% extends "general/layout.html" %}
-{% block head_title %} CRM - Detalle de Cliente {% endblock %} 
+{% block head_title %} CRM - Detalle de Empresa {% endblock %} 
 
 {% block page_content %}
 <div class="max-w-6xl mx-auto space-y-8">
@@ -8,21 +8,21 @@
         <div>
             <div class="flex items-center gap-3">
                 <h1 class="text-3xl font-bold text-gray-900 tracking-tight">
-                    {{ client.first_name }} {{ client.last_name }}
+                    {{ company.name }}
                 </h1>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                    {{ client.company.name|default:client.company }}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200 uppercase tracking-wider font-mono">
+                    CIF: {{ company.cif }}
                 </span>
             </div>
-            <p class="text-sm text-gray-500 mt-1">{{ client.position|default:"Sin cargo definido" }}</p>
+            <p class="text-sm text-gray-500 mt-1">Alta en el sistema: {{ company.created_at|date:"d/m/Y" }}</p>
         </div>
         
         <div class="flex items-center gap-3">
-            <a href="{% url "editar-cliente" client.pk %}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm gap-2">
+            <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 Editar
             </a>
-            <a href="{% url "eliminar-cliente" client.pk %}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors shadow-sm gap-2">
+            <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors shadow-sm gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 Eliminar
             </a>
@@ -32,55 +32,58 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-1 bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-6 h-fit">
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Datos de contacto</h3>
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Información Corporativa</h3>
             
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs font-medium text-gray-400">Email</label>
-                    <span class="text-sm font-medium text-gray-900 block mt-0.5 break-all">{{ client.email }}</span>
+                    <label class="block text-xs font-medium text-gray-400">Sitio Web</label>
+                    <a href="{{ company.website }}" target="_blank" class="text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline block mt-0.5 break-all">
+                        {{ company.website }}
+                    </a>
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-gray-400">Teléfono</label>
-                    <span class="text-sm font-medium text-gray-900 block mt-0.5">{{ client.phone|default:"—" }}</span>
+                    <label class="block text-xs font-medium text-gray-400">Email de Contacto</label>
+                    <span class="text-sm font-medium text-gray-900 block mt-0.5 break-all">{{ company.email }}</span>
                 </div>
-                <div class="border-t border-gray-100 pt-4">
-                    <label class="block text-xs font-medium text-gray-400">Comercial Asignado</label>
-                    <div class="flex items-center gap-2 mt-1.5">
-                        <div class="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs font-bold uppercase">
-                            {{ client.commercial.username|slice:":1" }}
-                        </div>
-                        <span class="text-sm font-medium text-gray-700">{{ client.commercial.get_full_name|default:client.commercial.username }}</span>
-                    </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-400">Teléfono General</label>
+                    <span class="text-sm font-medium text-gray-900 block mt-0.5">{{ company.phone }}</span>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-400">Dirección Fiscal / Sede</label>
+                    <span class="text-sm font-medium text-gray-600 block mt-0.5 leading-relaxed">{{ company.address }}</span>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-2 space-y-4">
-            <h3 class="text-lg font-bold text-gray-900 tracking-tight mb-4">Historial de interacciones</h3>
+            <h3 class="text-lg font-bold text-gray-900 tracking-tight mb-4">Contactos en esta empresa</h3>
             
-            {% if client.interactions.all %}
-                <div class="relative border-l border-gray-200 ml-3 space-y-6">
-                    {% for interaction in client.interactions.all %}
-                        <div class="relative pl-6">
-                            <span class="absolute -left-[6px] top-1.5 bg-white border-2 border-gray-900 rounded-full w-3 h-3"></span>
-                            
-                            <div class="bg-white border border-gray-100 rounded-lg p-4 shadow-sm hover:border-gray-200 transition-colors">
-                                <div class="flex items-center justify-between gap-4 mb-2">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 uppercase">
-                                        {{ interaction.contact_channel }}
-                                    </span>
-                                    <time class="text-xs text-gray-400 font-medium">
-                                        {{ interaction.created_at|date:"d/m/Y" }}
-                                    </time>
+            {% if company.clients.all %}
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <ul class="divide-y divide-gray-100">
+                        {% for client in company.clients.all %}
+                            <li class="p-4 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center justify-between gap-4">
+                                    <div>
+                                        <a href="{% url 'detalle-cliente' client.pk %}" class="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                                            {{ client.first_name }} {{ client.last_name }}
+                                        </a>
+                                        <p class="text-xs text-gray-500 mt-0.5">{{ client.position|default:"Sin cargo definido" }}</p>
+                                    </div>
+                                    <div class="flex items-center gap-6 text-sm text-gray-500">
+                                        <span class="hidden sm:inline">{{ client.email }}</span>
+                                        <span class="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">{{ client.phone|default:"—" }}</span>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed">{{ interaction.content }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% else %}
-                <div class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl p-6">
-                    <p class="text-sm text-gray-500">Este cliente aún no tiene interacciones registradas.</p>
+                <div class="text-center py-12 border-2 border-dashed border-gray-200 rounded-xl p-6">
+                    <svg class="w-8 h-8 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <p class="text-sm text-gray-500">No hay ningún cliente asignado a esta empresa todavía.</p>
                 </div>
             {% endif %}
         </div>
@@ -88,4 +91,3 @@
     </div>
 </div>
 {% endblock %}
-

@@ -1,5 +1,5 @@
 {% extends "general/layout.html" %}
-{% block head_title %} CRM - Lista de Clientes {% endblock %} 
+{% block head_title %} CRM - Lista de Empresas {% endblock %} 
 {% block page_content %}
     {% comment %} ENCABEZADO {% endcomment %}
     <div class="mb-6">
@@ -21,7 +21,7 @@
         class="w-full pl-9 pr-4 py-2 text-sm text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 transition-colors placeholder-gray-400 shadow-sm"
     >
 </form>
-    {% comment %} TABLA DE CLIENTES {% endcomment %}
+    {% comment %} TABLA DE EMPRESAS {% endcomment %}
     <div class="w-full overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
     <table class="w-full text-sm text-left text-gray-600 border-collapse">
         <thead class="bg-gray-50 text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
@@ -37,7 +37,7 @@
         {% for company in companies %}
             <tr class="hover:bg-gray-50/70 transition-colors duration-200">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <a href="#">{{ company.name }}</a>
+                    <a href="{% url "detalle-empresa" company.pk %}">{{ company.name }}</a>
                 </td>
                 <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
                     {{ company.email }}
@@ -61,7 +61,7 @@
     </table>
 </div>
     {% comment %} BOTON DE AÑADIR {% endcomment %}
-<a href="#" class="w-[200px] mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white 
+<a href="{% url "crear-empresa" %}" class="w-[200px] mt-4 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white 
                                     bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-sm gap-2">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

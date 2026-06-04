@@ -1,4 +1,4 @@
-from .models import Client
+from .models import Client, Company
 
 from django import forms
 
@@ -11,3 +11,10 @@ class ClientCreateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 
+class CompanyCreateForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
