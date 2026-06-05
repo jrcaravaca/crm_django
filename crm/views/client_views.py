@@ -5,6 +5,9 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.db.models import Q
+import csv
+from django.http import HttpResponse
+
 
 from ..models.client_model import Client
 from ..forms import ClientCreateForm
@@ -25,7 +28,39 @@ class ClientListView(ListView):
             queryset = queryset.filter(
                 Q(first_name__icontains=query) | Q(last_name__icontains=query) | Q(company__name__icontains=query) | Q(phone__icontains=query)
             )
+
+        scope = self.request.GET.get('scope')
+        if scope:
+            if scope == 'mine':
+                queryset = queryset.filter(commercial=self.request.user)
+            
         return queryset
+    
+    def get(self, request, *args, **kwargs): 
+        if request.GET.get('export') == 'csv':
+            return self.export_to_csv()
+        return super().get(request, *args, **kwargs)
+    
+    def export_to_csv(self): 
+        clients_to_export = self.get_queryset()
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = 'attachment; filename="clientes.csv"'
+        writer = csv.writer(response)
+        
+        writer.writerow(['Nombre', 'Apellidos', 'Empresa', 'Email', 'Teléfono', 'Comercial Asignado'])
+
+        
+        for client in clients_to_export:
+            writer.writerow([
+                client.first_name,                                              
+                client.last_name,                                               
+                client.company.name if client.company else 'Sin Empresa',       
+                client.email,                                                   
+                client.phone,                                                   
+                client.commercial.username if client.commercial else 'Sin Asignar' 
+            ])
+
+        return response
 
 
 @method_decorator(login_required, name='dispatch')
