@@ -35,6 +35,10 @@ class ClientCreateView(CreateView):
     success_url = reverse_lazy('clientes')
     form_class = ClientCreateForm
 
+    def form_valid(self, form): 
+        form.instance.commercial = self.request.user
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class ClientDetailView(DetailView): 
