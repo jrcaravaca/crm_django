@@ -2,8 +2,10 @@ from django.views.generic import CreateView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from ..models import Interaction, Client
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-
+@method_decorator(login_required, name='dispatch')
 class InteractionCreateView(CreateView): 
     model = Interaction
     fields = ['contact_channel', 'content']
